@@ -1,0 +1,18 @@
+BizFlow uses the BharatCode model API for its opt-in small-business assistant.
+
+Provider: BharatCode OpenAI-compatible Responses API
+Base URL: https://bharatcode.ai/api/model/v1
+Endpoint: POST /responses
+Model: qwen-3.8-27b
+Request storage: store=false
+Integration: src/main/java/com/bizflow/service/BharatCodeAssistantService.java
+
+The assistant sends the owner's question and a limited active-workspace summary
+(product count, inventory value, today's sales and estimated gross profit, and
+low-stock product names and quantities) only after the user checks the consent
+box. Customer names, email addresses, and invoice-level details are excluded.
+The API key is read from the server-side BHARATCODE_API_KEY environment
+variable and must never be committed to the repository. Copy `.env.example`
+to `.env` and set the key to enable live API calls in the VS Code launch profile.
+The public source repository contains no API secret; live API access must be
+configured by the person running or hosting the app.
