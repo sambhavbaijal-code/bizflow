@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101827" />
+  <title>BizFlow | Business Operating System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <section class="auth-screen" id="authScreen">
+    <div class="auth-card">
+      <a class="brand auth-brand" href="#"><span class="brand-mark">B</span><span>biz<span class="brand-light">flow</span><small>BUSINESS OS</small></span></a>
+      <div class="eyebrow auth-eyebrow">YOUR BUSINESSES, ONE SECURE LOGIN</div>
+      <h1 id="authTitle">Welcome back</h1><p class="auth-subtitle" id="authSubtitle">Sign in to open your business workspace.</p>
+      <div id="authFormWrap">
+        <form id="authForm" class="auth-form">
+          <label id="authNameWrap" class="auth-field" hidden>Your name<input id="authName" autocomplete="name" placeholder="e.g. Asha Patel"></label>
+          <label id="authBusinessWrap" class="auth-field" hidden>Shop / firm name<input id="authBusiness" autocomplete="organization" placeholder="Enter your shop or firm name"></label>
+          <label class="auth-field">Email address<input id="authEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+          <label class="auth-field">Password<input id="authPassword" type="password" required minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label>
+          <div class="auth-error" id="authError" role="alert"></div>
+          <button class="btn btn-primary auth-submit" id="authSubmit" type="submit">Sign in</button>
+        </form>
+        <p class="auth-switch" id="authSwitchLine">New to BizFlow? <button type="button" id="authSwitch">Create an account</button></p>
+      </div>
+      <div id="workspacePicker" hidden><div class="workspace-options" id="workspaceOptions"></div><button class="auth-back" type="button" id="workspaceBack">Back to sign in</button></div>
+      <div class="auth-foot">Each business has its own products, contacts, purchases and sales.</div>
+    </div>
+  </section>
+  <div class="app-shell" id="appShell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="BizFlow home">
+        <span class="brand-mark">B</span><span>biz<span class="brand-light">flow</span><small>BUSINESS OS</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list">
+        <button class="nav-link active" data-page="dashboard"><span>▦</span> Home</button>
+        <button class="nav-link" data-page="products"><span>◫</span> Products & Stock</button>
+        <button class="nav-link" data-page="sales"><span>↗</span> Sales & Billing</button>
+        <button class="nav-link" data-page="purchases"><span>↙</span> Purchases</button>
+        <button class="nav-link" data-page="parties"><span>♙</span> Customers & Suppliers</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><div class="help-icon">✦</div><strong>Business workspace</strong><p>Separate ERP records for each business.</p><span class="online-dot"></span> Workspace active
+        </div>
+        <div class="profile"><div class="avatar">BF</div><div><strong id="sidebarUserName">Account owner</strong><small>Workspace owner</small></div><span class="profile-more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="breadcrumbTitle">Overview</strong></div>
+        <div class="top-actions"><span class="system-status"><i></i> System operational</span><select id="businessSwitcher" class="business-switcher" aria-label="Choose business"></select><button class="btn btn-soft business-add" id="addBusiness">＋ Business</button><span class="signed-in-name" id="signedInName"></span><button class="btn btn-outline sign-out" id="signOut">Sign out</button></div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="page active" id="page-dashboard">
+          <div class="page-heading"><div><div class="eyebrow">YOUR BUSINESS AT A GLANCE</div><h1>Good business starts with clarity.</h1><p>Here is what is happening in your business today.</p></div><div class="heading-actions"><button class="btn btn-soft" id="refreshDashboard">↻ Refresh</button><button class="btn btn-primary" data-open="sale">＋ Create sale</button></div></div>
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-top"><span>Total products</span><span class="metric-icon purple">◫</span></div><strong id="metricProducts">—</strong><small>Active products in catalogue</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Inventory value</span><span class="metric-icon blue">▤</span></div><strong id="metricInventory">—</strong><small>At recorded purchase cost</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Sales today</span><span class="metric-icon green">↗</span></div><strong id="metricSales">—</strong><small>Invoices created today</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Gross profit today</span><span class="metric-icon green">⌁</span></div><strong id="metricGrossProfit">—</strong><small>Estimated, before expenses and tax</small></article>
+            <article class="metric-card"><div class="metric-top"><span>Low stock alerts</span><span class="metric-icon orange">⚑</span></div><strong id="metricLowStock">—</strong><small>Products at or below reorder level</small></article>
+          </div>
+          <div class="content-grid">
+            <section class="panel recent-panel"><div class="panel-heading"><div><h2>Recent sales</h2><p>Your latest customer transactions</p></div><button class="text-button" data-page="sales">View all →</button></div><div class="table-wrap"><table><thead><tr><th>INVOICE</th><th>CUSTOMER</th><th>DATE</th><th class="align-right">AMOUNT</th></tr></thead><tbody id="recentSalesBody"><tr><td colspan="4" class="empty-cell">Loading transactions...</td></tr></tbody></table></div></section>
+            <section class="panel low-stock-panel"><div class="panel-heading"><div><h2>Stock needs attention</h2><p>Products to consider reordering</p></div><span class="soft-count" id="lowStockBadge">0</span></div><div id="lowStockList" class="stock-list"><div class="empty-state">Loading stock...</div></div><button class="btn btn-outline full-width" data-page="products">Open inventory</button></section>
+          </div>
+          <section class="panel assistant-panel">
+            <div class="panel-heading"><div><div class="eyebrow">BHARATCODE AI</div><h2>Ask about this business</h2><p>Get practical answers grounded in your current stock and daily totals.</p></div><span class="assistant-badge">AI</span></div>
+            <div id="assistantSetup" class="assistant-setup" role="status" hidden></div>
+            <form id="assistantForm" class="assistant-form">
+              <label for="assistantQuestion">What would you like help with?</label>
+              <textarea id="assistantQuestion" rows="3" maxlength="1200" placeholder="For example: Which items should I reorder first?" required></textarea>
+              <label class="assistant-consent"><input id="assistantConsent" type="checkbox" required><span>Send my question and this workspace’s sales totals, inventory value, product count, and low-stock item names and quantities to BharatCode to generate an answer. Customer names and invoice details are not sent. Don’t include personal or customer details in your question.</span></label>
+              <div class="assistant-actions"><small>AI suggestions can be wrong. Verify figures before making business decisions.</small><button class="btn btn-primary" type="submit" id="assistantSubmit">Ask BharatCode</button></div>
+            </form>
+            <div id="assistantAnswer" class="assistant-answer" aria-live="polite" hidden></div>
+          </section>
+          <div class="bottom-note"><span class="note-mark">✦</span><div><strong>One connected workspace</strong><p>When you record a purchase or sale, BizFlow updates the related stock and business records automatically.</p></div></div>
+        </section>
+
+        <section class="page" id="page-products">
+          <div class="page-heading"><div><div class="eyebrow">CATALOGUE & INVENTORY</div><h1>Products & stock</h1><p>Manage product details, prices and available quantities.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="product">＋ Add product</button></div></div>
+          <div class="panel"><div class="toolbar"><div class="search-box"><span>⌕</span><input id="productSearch" type="search" placeholder="Search by product, SKU, barcode or category..." /></div><span class="result-count" id="productCountLabel">Loading products...</span></div><div class="table-wrap"><table><thead><tr><th>PRODUCT</th><th>SKU / BARCODE</th><th>CATEGORY</th><th>UNIT COST</th><th>SELLING PRICE</th><th>AVAILABLE</th><th>STATUS</th><th></th></tr></thead><tbody id="productsBody"><tr><td colspan="8" class="empty-cell">Loading products...</td></tr></tbody></table></div></div>
+        </section>
+
+        <section class="page" id="page-sales">
+          <div class="page-heading"><div><div class="eyebrow">CUSTOMER TRANSACTIONS</div><h1>Sales & billing</h1><p>Create a sale, generate an invoice and automatically reduce stock.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="sale">＋ New sale</button></div></div>
+          <div class="panel"><div class="panel-heading"><div><h2>Recent invoices</h2><p>Latest completed sales</p></div></div><div class="table-wrap"><table><thead><tr><th>INVOICE</th><th>CUSTOMER</th><th>DATE</th><th>ITEMS</th><th class="align-right">TOTAL</th></tr></thead><tbody id="salesBody"><tr><td colspan="5" class="empty-cell">Loading sales...</td></tr></tbody></table></div></div>
+        </section>
+
+        <section class="page" id="page-purchases">
+          <div class="page-heading"><div><div class="eyebrow">SUPPLIER & STOCK INWARD</div><h1>Purchases</h1><p>Record incoming products and automatically increase inventory.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="purchase">＋ Record purchase</button></div></div>
+          <div class="panel"><div class="panel-heading"><div><h2>Recent purchases</h2><p>Latest stock-in transactions</p></div></div><div class="table-wrap"><table><thead><tr><th>PURCHASE REF.</th><th>SUPPLIER</th><th>DATE</th><th>ITEMS</th><th class="align-right">TOTAL</th></tr></thead><tbody id="purchasesBody"><tr><td colspan="5" class="empty-cell">Loading purchases...</td></tr></tbody></table></div></div>
+        </section>
+
+        <section class="page" id="page-parties">
+          <div class="page-heading"><div><div class="eyebrow">BUSINESS CONTACTS</div><h1>Customers & suppliers</h1><p>Keep customer and supplier information in one place.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="party">＋ Add contact</button></div></div>
+          <div class="panel"><div class="toolbar"><div class="tabs"><button class="tab active" data-party-filter="ALL">All contacts</button><button class="tab" data-party-filter="CUSTOMER">Customers</button><button class="tab" data-party-filter="SUPPLIER">Suppliers</button></div><span class="result-count" id="partyCountLabel"></span></div><div class="table-wrap"><table><thead><tr><th>NAME</th><th>TYPE</th><th>PHONE</th><th>EMAIL</th><th>ADDRESS</th></tr></thead><tbody id="partiesBody"><tr><td colspan="5" class="empty-cell">Loading contacts...</td></tr></tbody></table></div></div>
+        </section>
+      </div>
+      <footer class="footer"><span>© 2026 BizFlow Starter</span><span>Built for connected product businesses</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><div class="eyebrow" id="modalEyebrow">NEW RECORD</div><h2 id="modalTitle">Add product</h2></div><button class="close-button" id="closeModal" aria-label="Close">×</button></div>
+      <form id="modalForm"><div id="modalFields" class="form-grid"></div><div class="form-error" id="formError"></div><div class="modal-actions"><button class="btn btn-outline" type="button" id="previewInvoiceButton" hidden>Preview invoice</button><button class="btn btn-soft" type="button" id="cancelModal">Cancel</button><button class="btn btn-primary" type="submit" id="submitModal">Save record</button></div></form>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="scanner-backdrop" id="scannerBackdrop" aria-hidden="true"><section class="scanner-dialog" role="dialog" aria-modal="true" aria-labelledby="scannerTitle"><div class="modal-head"><div><div class="eyebrow">PRODUCT LOOKUP</div><h2 id="scannerTitle">Scan barcode</h2></div><button class="close-button" id="closeScanner" aria-label="Close camera">×</button></div><video id="barcodeVideo" playsinline muted></video><p id="scannerStatus" class="field-help">Allow camera access and point it at a product barcode.</p></section></div>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>
